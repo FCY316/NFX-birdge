@@ -1,0 +1,31 @@
+{
+    "header": {
+        "connectWallet": "지갑 연결",
+        "myWallet": "내 지갑",
+        "walletAddress": "지갑 주소",
+        "fiboBalance": "잔액:",
+        "disconnectWallet": "지갑 연결 끊기",
+        "viewOnExplorer": "탐색기에서 보기"
+    },
+    "home": {
+        "from": "출발 체인",
+        "balance": "잔액:",
+        "enterCrossChainAmount": "크로스체인 금액 입력",
+        "insufficientBalance": "잔액 부족",
+        "to": "도착 체인",
+        "baseFee": "기본 수수료:",
+        "protocolFee": "프로토콜 수수료:",
+        "receiveAddress": "수신 주소",
+        "enterReceiveAddress": "주소 입력",
+        "invalidAddress": "유효한 주소를 입력하세요",
+        "confirm": "확인",
+        "enable": "활성화",
+        "crossChainSuccess": "크로스체인 성공",
+        "crossChainFailed": "크로스체인 실패",
+        "enableSuccess": "활성화 성공",
+        "enableFailed": "활성화 실패",
+        "minTransferAmount": "최소 금액:",
+        "maxTransferAmount": "최대 금액:",
+        "protocolFeePercentage": "프로토콜 수수료 %:"
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "header": {
+        "connectWallet": "ウォレットに接続",
+        "myWallet": "マイウォレット",
+        "walletAddress": "ウォレットアドレス",
+        "fiboBalance": "残高：",
+        "disconnectWallet": "ウォレットを切断",
+        "viewOnExplorer": "エクスプローラーで表示"
+    },
+    "home": {
+        "from": "送信元チェーン",
+        "balance": "残高：",
+        "enterCrossChainAmount": "クロスチェーン金額を入力",
+        "insufficientBalance": "残高不足",
+        "to": "送信先チェーン",
+        "baseFee": "基本手数料：",
+        "protocolFee": "プロトコル手数料：",
+        "receiveAddress": "受取アドレス",
+        "enterReceiveAddress": "アドレスを入力",
+        "invalidAddress": "有効なアドレスを入力してください",
+        "confirm": "確認",
+        "enable": "有効化",
+        "crossChainSuccess": "クロスチェーン成功",
+        "crossChainFailed": "クロスチェーン失敗",
+        "enableSuccess": "有効化成功",
+        "enableFailed": "有効化失敗",
+        "minTransferAmount": "最小額：",
+        "maxTransferAmount": "最大額：",
+        "protocolFeePercentage": "プロトコル手数料％："
+    }
+}

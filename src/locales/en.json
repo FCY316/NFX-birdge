@@ -1,0 +1,31 @@
+{
+    "header": {
+        "connectWallet": "Connect Wallet",
+        "myWallet": "My Wallet",
+        "walletAddress": "Wallet Address",
+        "fiboBalance": "Balance:",
+        "disconnectWallet": "Disconnect Wallet",
+        "viewOnExplorer": "View on Explorer"
+    },
+    "home": {
+        "from": "From Chain",
+        "balance": "Balance:",
+        "enterCrossChainAmount": "Enter cross-chain amount",
+        "insufficientBalance": "Insufficient balance",
+        "to": "To Chain",
+        "baseFee": "Base Fee:",
+        "protocolFee": "Protocol Fee:",
+        "receiveAddress": "Receive Address",
+        "enterReceiveAddress": "Enter address",
+        "invalidAddress": "Invalid address",
+        "confirm": "Confirm",
+        "enable": "Enable",
+        "crossChainSuccess": "Cross-chain successful",
+        "crossChainFailed": "Cross-chain failed",
+        "enableSuccess": "Enabled successfully",
+        "enableFailed": "Enable failed",
+        "minTransferAmount": "Min Amount:",
+        "maxTransferAmount": "Max Amount:",
+        "protocolFeePercentage": "Protocol Fee %:"
+    }
+}

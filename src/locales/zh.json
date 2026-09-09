@@ -1,0 +1,31 @@
+{
+    "header": {
+        "connectWallet": "连接钱包",
+        "myWallet": "我的钱包",
+        "walletAddress": "钱包地址",
+        "fiboBalance": "余额：",
+        "disconnectWallet": "退出钱包",
+        "viewOnExplorer": "在区块浏览器查看"
+    },
+    "home": {
+        "from": "来源链",
+        "balance": "余额：",
+        "enterCrossChainAmount": "请输入跨链金额",
+        "insufficientBalance": "余额不足",
+        "to": "目标链",
+        "baseFee": "基础手续费：",
+        "protocolFee": "协议手续费：",
+        "receiveAddress": "接收地址",
+        "enterReceiveAddress": "请输入接收地址",
+        "invalidAddress": "请输入正确的地址",
+        "confirm": "确定",
+        "enable": "启用",
+        "crossChainSuccess": "跨链成功",
+        "crossChainFailed": "跨链失败",
+        "enableSuccess": "启用成功",
+        "enableFailed": "启用失败",
+        "minTransferAmount": "最小转账金额：",
+        "maxTransferAmount": "最大转账金额：",
+        "protocolFeePercentage": "协议百分比手续费："
+    }
+}
