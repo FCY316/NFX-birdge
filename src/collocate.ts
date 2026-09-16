@@ -1,14 +1,14 @@
-export const evmChain = [1678, 56]; // 支持的链ID列表
+export const evmChain = [1677, 56]; // 支持的链ID列表
 export const chainParams: any = {
-  1678: {
-    chainId: 1678,
-    chainName: "intl-text.net", // 自定义链的名称
+  1677: {
+    chainId: 1677,
+    chainName: "InterstellarChain", // 自定义链的名称
     nativeCurrency: {
       name: "HUGE",
       symbol: "HUGE",
       decimals: 18,
     },
-    rpcUrls: ["https://rpc.interstellarchain.org/"],
+    rpcUrls: ["https://rpc.interstellarchain.org"],
     blockExplorerUrls: ["https://scan.interstellarchain.org/"],
   },
   56: {
@@ -37,6 +37,5 @@ export const chainParams: any = {
 
 export const chainData = [
   { chainName: "INTERSTELLAR", symbol: "NFX", chainID: evmChain[0] },
-  { chainName: "BNB Chain", symbol: "NFX", chainID: 56 },
-  // { chainName: "BNB Chain Text", symbol: "USDT", chainID: 97 },
+  { chainName: "BNB Chain", symbol: "NFX", chainID: evmChain[1] },
 ];

@@ -26,6 +26,7 @@
         "enableFailed": "启用失败",
         "minTransferAmount": "最小转账金额：",
         "maxTransferAmount": "最大转账金额：",
-        "protocolFeePercentage": "协议百分比手续费："
+        "protocolFeePercentage": "协议百分比手续费：",
+        "amountOutOfRange": "转账金额需最小数量{{min}}，最大不超过{{max}}"
     }
 }

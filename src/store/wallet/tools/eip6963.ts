@@ -35,12 +35,12 @@ const isProviderDetail = (value: unknown): value is Eip6963ProviderDetail => {
   const detail = value as Partial<Eip6963ProviderDetail>;
   return Boolean(
     detail.info &&
-      typeof detail.info.uuid === "string" &&
-      typeof detail.info.name === "string" &&
-      typeof detail.info.icon === "string" &&
-      typeof detail.info.rdns === "string" &&
-      detail.provider &&
-      typeof detail.provider.request === "function",
+    typeof detail.info.uuid === "string" &&
+    typeof detail.info.name === "string" &&
+    typeof detail.info.icon === "string" &&
+    typeof detail.info.rdns === "string" &&
+    detail.provider &&
+    typeof detail.provider.request === "function",
   );
 };
 
@@ -54,6 +54,13 @@ const notifyListeners = () => {
 const announceProvider = (event: Event) => {
   const detail = (event as CustomEvent<unknown>).detail;
   if (!isProviderDetail(detail) || providers.has(detail.info.uuid)) return;
+
+  // 某些钱包 WebView 会针对同一个钱包重复公告，并且 UUID 可能不同。
+  // rdns 是钱包的稳定标识；按它去重，避免钱包选择列表出现多个 TP 钱包。
+  const hasSameRdns = Array.from(providers.values()).some(
+    ({ info }) => info.rdns === detail.info.rdns,
+  );
+  if (hasSameRdns) return;
 
   providers.set(detail.info.uuid, detail);
   notifyListeners();

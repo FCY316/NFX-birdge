@@ -26,6 +26,7 @@
         "enableFailed": "Enable failed",
         "minTransferAmount": "Min Amount:",
         "maxTransferAmount": "Max Amount:",
-        "protocolFeePercentage": "Protocol Fee %:"
+        "protocolFeePercentage": "Protocol Fee %:",
+        "amountOutOfRange": "Transfer amount must be at least {{min}}, and not exceed {{max}}"
     }
 }

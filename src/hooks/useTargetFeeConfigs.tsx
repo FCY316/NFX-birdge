@@ -24,6 +24,7 @@ const useTargetFeeConfigs = (chain: number) => {
 
     // 定义获取目标链手续费配置的函数
     const getTargetFeeConfigs = useCallback(async () => {
+
         if (bridge) { // 确保合约实例存在
             try {
                 setLoading(true); // 设置加载状态为 true

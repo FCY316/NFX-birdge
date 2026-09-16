@@ -26,6 +26,7 @@
         "enableFailed": "활성화 실패",
         "minTransferAmount": "최소 금액:",
         "maxTransferAmount": "최대 금액:",
-        "protocolFeePercentage": "프로토콜 수수료 %:"
+        "protocolFeePercentage": "프로토콜 수수료 %:",
+        "amountOutOfRange": "송금 금액은 최소 {{min}}, 최대 {{max}}까지 가능합니다"
     }
 }

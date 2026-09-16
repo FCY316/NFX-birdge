@@ -1,7 +1,8 @@
 // 导入必要的模块和组件
 import {
+    useEffect,
     useMemo,
-    useState,
+    // useState,
 } from 'react';
 
 import {
@@ -10,7 +11,7 @@ import {
     FormProps,
     Input,
     InputNumber,
-    InputNumberProps,
+    // InputNumberProps,
 } from 'antd';
 import {
     formatUnits,
@@ -47,7 +48,7 @@ type FieldType = {
 const Home = () => {
     const { t } = useTranslation(); // 使用国际化 Hook
     const [form] = Form.useForm(); // Ant Design 表单实例
-    const [moneyNum, setMoneyNum] = useState(0); // 用户输入的金额
+    // const [moneyNum, setMoneyNum] = useState(0); // 用户输入的金额
     const { chainId, provider } = useConnectWallet(); // 获取当前链 ID 和钱包提供者
     const { tokenBalance, getTokenBalance, tokenBalanceLod } = useGetTokenBalance(); // 获取代币余额
     const { allowanceBridge, allowanceBridgeLod, approveBridge, getBridgeAllowance } = useGetAllowanceBridge(); // 获取授权额度
@@ -57,8 +58,6 @@ const Home = () => {
         // 存款成功后的回调
         getTokenBalance(); // 更新代币余额
         getBridgeAllowance(); // 更新授权额度
-        setMoneyNum(0); // 重置金额
-
         setTimeout(() => {
             form.resetFields(); // 重置表单字段
         });
@@ -79,17 +78,15 @@ const Home = () => {
     }, [chainArr]);
 
     const { targetFeeConfigs, targetFeeConfigsLod } = useTargetFeeConfigs(chainIdIng); // 获取目标链手续费配置
+    const moneyNumMemo = Form.useWatch('sum', form) || 0; // 监听表单中跨链金额的变化
 
     // 防抖函数，用于延迟计算手续费
     const debouncedClick = useDebounceFn(() => {
-        calculateFee(parseUnits(moneyNum + ''), chainIdIng);
-    }, 300);
-
-    // 处理金额输入变化
-    const onChange: InputNumberProps['onChange'] = (value) => {
-        setMoneyNum(Number(value));
+        calculateFee(parseUnits(moneyNumMemo + ''), chainIdIng);
+    }, 0);
+    useEffect(() => {
         debouncedClick();
-    };
+    }, [debouncedClick, moneyNumMemo])
 
     // 切换链操作
     const changeChain = () => {
@@ -97,11 +94,10 @@ const Home = () => {
             changeChainID(provider, chainIdIng);
         }
     };
-
     // 是否已经授权（授权额度 >= 用户输入金额）
     const isApproveBridge = useMemo(() => {
-        return allowanceBridge >= parseUnits(moneyNum + '');
-    }, [allowanceBridge, moneyNum]);
+        return allowanceBridge >= parseUnits(moneyNumMemo + '');
+    }, [allowanceBridge, moneyNumMemo]);
     // 表单提交回调
     const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
         if (isApproveBridge) {
@@ -118,18 +114,22 @@ const Home = () => {
 
     // 计算最终金额（扣除手续费）
     const gsaFee = useMemo(() => {
-        if (!moneyNum) return 0;
-        const money = parseUnits(moneyNum + '');
+        if (!moneyNumMemo) return 0;
+        const money = parseUnits(moneyNumMemo + '');
         const endMoney = money - fee.baseFee - fee.protocolFee;
         return Number(formatUnits(endMoney));
-    }, [moneyNum, fee]);
+    }, [moneyNumMemo, fee]);
 
     // 验证金额输入
     const validatorSumPower = ({ getFieldValue }: { getFieldValue: Function }) => ({
         validator(_: any, value: number) {
+            const { minAmount, maxAmount } = targetFeeConfigs
             if (!value) return Promise.resolve();
             if (parseUnits(value + '') > tokenBalance) {
                 return Promise.reject(new Error(`${chainData[chainArr[0]].symbol}${t('home.insufficientBalance')}`));
+            }
+            else if (parseUnits(moneyNumMemo + '') < minAmount || parseUnits(moneyNumMemo + '') > maxAmount) {
+                return Promise.reject(new Error(t('home.amountOutOfRange', { min: Number(formatUnits(minAmount)), max: Number(formatUnits(maxAmount)) })));
             }
             return Promise.resolve();
         },
@@ -175,12 +175,12 @@ const Home = () => {
                                 ]}
                             >
                                 <InputNumber
-                                    min={targetFeeConfigsLod ? undefined : formatUnits(targetFeeConfigs.minAmount)}
-                                    max={targetFeeConfigsLod ? undefined : formatUnits(targetFeeConfigs.maxAmount)}
+                                    // min={targetFeeConfigsLod ? undefined : formatUnits(targetFeeConfigs.minAmount)}
+                                    // max={targetFeeConfigsLod ? undefined : formatUnits(targetFeeConfigs.maxAmount)}
                                     controls={false}
                                     placeholder='0.000000'
                                     className='w-full box-border text-xl sm:text-2xl font-semibold'
-                                    onChange={onChange}
+                                    // onChange={onChange}
                                     formatter={(value) => formatTo6Decimals(value || '')}
                                 />
                             </Form.Item>
@@ -216,7 +216,7 @@ const Home = () => {
                             <p className='text-gray-500 text-xs sm:text-sm mb-2 font-medium'>{chainData[chainArr[1]].symbol}</p>
                             <InputNumber
                                 value={!calculateFeeLod ? gsaFee : ''}
-                                prefix={calculateFeeLod && <LoadingOutlined className='text-purple-500' />}
+                                prefix={calculateFeeLod ? <LoadingOutlined className='text-purple-500' /> : ''}
                                 readOnly
                                 controls={false}
                                 placeholder='0.0000'
